@@ -1,0 +1,19 @@
+.button {
+    display: flex;
+    cursor: pointer;
+    padding: 5px 10px;
+    width: fit-content;
+    border-radius: 5px;
+
+    &.primary {
+        background-color: aquamarine;
+    }
+
+    &.warning {
+        background-color: yellow;
+    }
+
+    &.danger {
+        background-color: red;
+    }
+}

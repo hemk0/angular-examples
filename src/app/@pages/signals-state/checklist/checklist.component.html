@@ -1,0 +1,34 @@
+<app-checklist-item-header
+*ngIf="checklist() as checklist"
+[checklist]="checklist"
+(addItem)="checklistItemBeingEdited.set({})"
+(resetChecklist)="cis.reset$.next($event)"
+/>
+
+<app-checklist-item-list
+[checklistItems]="items()"
+(toggle)="cis.toggle$.next($event)"
+(delete)="cis.remove$.next($event)"
+(edit)="checklistItemBeingEdited.set($event)"
+/>
+
+<app-modal [isOpen]="!!checklistItemBeingEdited()">
+<ng-template>
+  <app-form-modal
+    [title]="checklistItemBeingEdited()?.id ? 'Edit Item' : 'Create item'"
+    [formGroup]="checklistItemForm"
+    (close)="checklistItemBeingEdited.set(null)"
+    (save)="
+      checklistItemBeingEdited()?.id
+        ? cis.edit$.next({
+          id: checklistItemBeingEdited()!.id!,
+          data: checklistItemForm.getRawValue(),
+        })
+        : cis.add$.next({
+          item: checklistItemForm.getRawValue(),
+          checklistId: checklist()?.id!,
+        })
+    "
+  ></app-form-modal>
+</ng-template>
+</app-modal>

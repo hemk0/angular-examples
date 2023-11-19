@@ -1,0 +1,11 @@
+<ul class="list">
+    <li class="item" *ngFor="let checklist of checklists; trackBy: trackByFn">
+        <a routerLink="/checklist/{{ checklist.id }}">{{ checklist.title }}</a>
+        <button class="button warning" (click)="edit.emit(checklist)">Edit</button>
+        <button class="button danger" (click)="delete.emit(checklist.id)">Delete</button>
+    </li>
+</ul>
+
+<div *ngIf="checklists.length === 0">
+    <p>Click the add button to create your first quicklist!</p>
+</div>

@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    height: 600px;
+    border: 1px solid aquamarine;
+
+    .channels {
+        display: flex;
+        flex-grow: 1;
+        width: 20%;
+        border: 1px solid gray;
+    }
+
+    .messages {
+        display: flex;
+        width: 80%;
+        flex-grow: 1;
+    }
+}

@@ -1,0 +1,32 @@
+:host {
+    display: flex;
+    width: 100%;
+    flex-direction: column-reverse;
+    overflow: auto;
+    overflow-anchor: none;
+    position: sticky;
+
+    .holder {
+        height: 300px;
+        width: 100%;
+        background-color: black;
+    }
+
+    .messages {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        row-gap: 10px;
+        padding: 10px;
+        margin-top: auto;
+
+        app-message {
+            &.left {
+                align-self: flex-start;
+            }
+            &.right {
+                align-self: flex-end;
+            }
+        }
+    }
+}

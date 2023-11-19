@@ -1,0 +1,17 @@
+<div class="holder"></div>
+
+<section class="messages">
+    @for (messages of additionalMessages(); track $index) {
+        @for (message of messages.messages; track $index) {
+            <app-message [message]="message" [ngClass]="{'left': message.author.id === 1, 'right': message.author.id === 2}"></app-message>
+        }
+    }
+    @for (message of messages(); track $index) {
+        <app-message [message]="message" [ngClass]="{'left': message.author.id === 1, 'right': message.author.id === 2}"></app-message>
+    }
+</section>
+
+<div appInViewPort (inViewportChange)="$event && loadNext()" [inViewportOptions]="{rootMargin: '0px'}"></div>
+
+
+

@@ -1,0 +1,30 @@
+<h1>Quicklists</h1>
+<button class="button primary" (click)="checklistBeingEdited.set({})">Add</button>
+
+<h2>Your checklists</h2>
+
+<p *ngIf="error()">{{ error() }}</p>
+
+<app-checklist-list
+  [checklists]="checklists()"
+  (delete)="cs.remove$.next($event)"
+  (edit)="checklistBeingEdited.set($event)"
+/>
+
+<app-modal [isOpen]="!!checklistBeingEdited()">
+  <ng-template>
+    <app-form-modal
+      title="test"
+      [formGroup]="checklistForm"
+      (close)="checklistBeingEdited.set(null)"
+      (save)="
+        checklistBeingEdited()?.id
+          ? cs.edit$.next({
+              id: checklistBeingEdited()!.id!,
+              data: checklistForm.getRawValue()
+            })
+          : cs.add$.next(checklistForm.getRawValue())
+      "
+    ></app-form-modal>
+  </ng-template>
+</app-modal>
